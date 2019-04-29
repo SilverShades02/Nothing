@@ -19,12 +19,14 @@
  * along with OpenDelta. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.chainfire.opendelta;
+package eu.chainfire.opendelta
 
-public class Application extends android.app.Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Logger.setDebugLogging(getResources().getBoolean(R.bool.debug_output));
+object Native {
+    external fun zipadjust(filenameIn: String, filenameOut: String, decompress: Int): Int
+
+    external fun dedelta(filenameSource: String, filenameDelta: String, filenameOut: String): Int
+
+    init {
+        System.loadLibrary("opendelta")
     }
 }

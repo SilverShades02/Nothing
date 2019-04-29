@@ -19,14 +19,18 @@
  * along with OpenDelta. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.chainfire.opendelta;
+package eu.chainfire.opendelta
 
-public class Native {
-    public static native int zipadjust(String filenameIn, String filenameOut, int decompress);
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.os.UserManager
 
-    public static native int dedelta(String filenameSource, String filenameDelta, String filenameOut);
-
-    static {
-        System.loadLibrary("opendelta");
+class BootCompleteReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        val um = UserManager.get(context)
+        if (um.isAdminUser()) {
+            UpdateService.startClearRunningInstall(context)
+        }
     }
 }

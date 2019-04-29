@@ -19,30 +19,30 @@
  * along with OpenDelta. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.chainfire.opendelta;
+package eu.chainfire.opendelta
 
-import java.util.Locale;
+import java.util.Locale
 
-public class Logger {
-    private final static String LOG_TAG = "OpenDelta";
-    
-    private static boolean log = true;
+object Logger {
+    private val LOG_TAG = "OpenDelta"
 
-    public static void setDebugLogging(boolean enabled) {
-        log = enabled;
+    private var log = true
+
+    fun setDebugLogging(enabled: Boolean) {
+        log = enabled
     }
 
-    public static void d(String message, Object... args) {
+    fun d(message: String, vararg args: Any) {
         if (log)
-            android.util.Log.d(LOG_TAG, String.format(Locale.ENGLISH, message, args));
+            android.util.Log.d(LOG_TAG, String.format(Locale.ENGLISH, message, *args))
     }
 
-    public static void ex(Exception e) {
+    fun ex(e: Exception) {
         if (log)
-            e.printStackTrace();
+            e.printStackTrace()
     }
 
-    public static void i(String message, Object... args) {
-        android.util.Log.i(LOG_TAG, String.format(Locale.ENGLISH, message, args));
+    fun i(message: String, vararg args: Any) {
+        android.util.Log.i(LOG_TAG, String.format(Locale.ENGLISH, message, *args))
     }
 }

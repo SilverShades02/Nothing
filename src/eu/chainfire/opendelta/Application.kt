@@ -19,19 +19,11 @@
  * along with OpenDelta. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.chainfire.opendelta;
+package eu.chainfire.opendelta
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.UserManager;
-
-public class BootCompleteReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        UserManager um = UserManager.get(context);
-        if (um.isAdminUser()) {
-            UpdateService.startClearRunningInstall(context);
-        }
+class Application : android.app.Application() {
+    override fun onCreate() {
+        super.onCreate()
+        Logger.setDebugLogging(resources.getBoolean(R.bool.debug_output))
     }
 }
